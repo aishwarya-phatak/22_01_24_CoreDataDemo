@@ -37,6 +37,10 @@ class ViewController: UIViewController {
         }
         
         for i in 1...3{
+            let userObject = NSManagedObject(
+                entity: userEntity!,
+                insertInto: managedContext)
+            
             userObject.setValue("Person\(i)", forKey: "firstname")
             userObject.setValue("PersonLastName\(i)", forKey: "lastname")
         }
