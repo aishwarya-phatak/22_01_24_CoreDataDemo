@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UISearchBarDelegate{
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,8 +58,13 @@ class ViewController: UIViewController {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>.init(entityName: "User")
         
+        fetchRequest.predicate = NSPredicate(format: "firstname = %@", "dipali")
+        
         do{
             let results = try managedContext.fetch(fetchRequest) as! [NSManagedObject]
+            
+            let objectToBeDeleted = results[0] as! NSManagedObject
+            managedContext.delete(objectToBeDeleted)
             
             for eachResult in results{
                 print("Firstname is :\(eachResult.value(forKey: "firstname") as! String)")
